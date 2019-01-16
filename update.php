@@ -8,11 +8,12 @@ include'log.php';
 <head>
 	<meta charset="utf-8">
 	<title>Ajouter une randonnée</title>
-	<link rel="stylesheet" href="css/basics1.css" media="screen" title="no title" charset="utf-8">
+	<link rel="stylesheet" href="css/basics.css" media="screen" title="no title" charset="utf-8">
 </head>
 <body>
-	<a href="read.php">Liste des données</a>
 	<h1>Ajouter</h1>
+
+    <div id="gen">
 	<form action="" method="post">
 
 		<div>
@@ -24,7 +25,7 @@ include'log.php';
 		<div>
 			<label for="difficulty">Difficulté</label>
 			<select name="difficulty">
-
+                <option selected="selected"> <?= $_GET['difficulte'] ?> </option>
 				<option value="très facile">Très facile</option>
 				<option value="facile">Facile</option>
 				<option value="moyen">Moyen</option>
@@ -45,8 +46,18 @@ include'log.php';
 			<label for="height_difference">Dénivelé</label>
 			<input type="text" name="height_difference" value="<?= $_GET['denivele'] ?>">
 		</div>
-		<button type="submit" name="button">Envoyer</button>
+        <div class="div">
+            <button type="submit" name="button">Envoyer</button>
+
+        </div>
 	</form>
+
+        <div class="lien">
+            <a href="read.php">Liste des données</a>
+        </div>
+
+    </div>
+
 </body>
 </html>
 

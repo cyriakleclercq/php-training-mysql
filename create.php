@@ -52,7 +52,7 @@ include 'log.php';
             </div>
         </form>
 
-        <div class="div">
+        <div class="lien">
             <a href="read.php">Liste des données</a>
         </div>
 
