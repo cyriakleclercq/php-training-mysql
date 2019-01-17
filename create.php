@@ -1,5 +1,6 @@
 <?php
 include 'log.php';
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +14,7 @@ include 'log.php';
 <body>
 	<h1>Ajouter</h1>
 
-    <div id="gen">
+    <div class="gen">
         <form action="" method="post">
             <div>
                 <label for="name">Name</label>
@@ -46,6 +47,14 @@ include 'log.php';
                     <input type="text" name="height_difference" value="">
             </div>
 
+            <div>
+                <label for="available">disponibilite</label>
+                <select name="available">
+                    <option value="oui"> Oui</option>
+                    <option value="non">Non</option>
+                </select>
+            </div>
+
             <div class="div">
             <button type="submit" name="button">Envoyer</button>
 
@@ -57,6 +66,12 @@ include 'log.php';
         </div>
 
     </div>
+    <div class="dsc">
+        <div class="deco">
+            <a href="logout.php"> Deconnexion </a>
+        </div>
+    </div>
+
 </body>
 </html>
 
@@ -76,14 +91,17 @@ $duree = filter_var($duree,FILTER_SANITIZE_STRING);
 $denivele = (isset($_POST['height_difference']) ? $_POST['height_difference'] : null);
 $denivele = filter_var($denivele,FILTER_SANITIZE_NUMBER_FLOAT);
 
+$disponibilite = (isset($_POST['available']) ? $_POST['available'] : null);
+$disponibilite = filter_var($disponibilite,FILTER_SANITIZE_STRING);
 
-function ajout ($name,$difficulte,$distance,$duree,$denivele) {
+
+function ajout ($name,$difficulte,$distance,$duree,$denivele,$disponibilite) {
 
     GLOBAL $conn;
 
-    $stmt = $conn -> prepare("INSERT INTO `hiking` (`name`,`difficulty`,`distance`,`duration`,`height_difference`) VALUE (?,?,?,?,?)");
+    $stmt = $conn -> prepare("INSERT INTO `hiking` (`name`,`difficulty`,`distance`,`duration`,`height_difference`,`available`) VALUE (?,?,?,?,?,?)");
 
-    $stmt -> bind_param("ssisi",$name,$difficulte,$distance,$duree,$denivele);
+    $stmt -> bind_param("ssisis",$name,$difficulte,$distance,$duree,$denivele,$disponibilite);
 
     $stmt -> execute();
 
@@ -91,4 +109,4 @@ function ajout ($name,$difficulte,$distance,$duree,$denivele) {
 
 }
 
-ajout($name,$difficulte,$distance,$duree,$denivele);
+ajout($name,$difficulte,$distance,$duree,$denivele,$disponibilite);

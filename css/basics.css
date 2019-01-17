@@ -25,7 +25,7 @@ h1 {
   font-size: 30px;
 }
 
-#gen {
+.gen {
   border: solid;
   margin-left: 10%;
   margin-right: 10%;
@@ -48,4 +48,19 @@ button {
   text-align: center;
   padding-top: 5%;
   font-size: 25px;
+}
+
+.deco {
+  border: solid;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 10px 10px 10px 10px;
+  font-size: 20px;
+  background: skyblue;
+}
+
+.dsc {
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-around;
 }

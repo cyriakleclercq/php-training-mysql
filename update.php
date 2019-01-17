@@ -1,6 +1,7 @@
 <?php
 
 include'log.php';
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +14,7 @@ include'log.php';
 <body>
 	<h1>Ajouter</h1>
 
-    <div id="gen">
+    <div class="gen">
 	<form action="" method="post">
 
 		<div>
@@ -46,6 +47,14 @@ include'log.php';
 			<label for="height_difference">Dénivelé</label>
 			<input type="text" name="height_difference" value="<?= $_GET['denivele'] ?>">
 		</div>
+        <div>
+            <label for="available">disponibilite</label>
+            <select name="available">
+                <option selected="selected"> <?= $_GET['disponibilite'] ?> </option>
+                <option value="oui"> Oui</option>
+                <option value="non">Non</option>
+            </select>
+        </div>
         <div class="div">
             <button type="submit" name="button">Envoyer</button>
 
@@ -57,6 +66,12 @@ include'log.php';
         </div>
 
     </div>
+    <div class="dsc">
+        <div class="deco">
+            <a href="logout.php"> Deconnexion </a>
+        </div>
+    </div>
+
 
 </body>
 </html>
@@ -82,21 +97,21 @@ $duree = filter_var($duree,FILTER_SANITIZE_STRING);
 $denivele = (isset($_POST['height_difference']) ? $_POST['height_difference'] : null);
 $denivele = filter_var($denivele,FILTER_SANITIZE_NUMBER_FLOAT);
 
-ECHO $id, $nom, $difficulte, $distance, $duree,$denivele;
+$disponibilite = (isset($_POST['available']) ? $_POST['available'] : null);
+$disponibilite = filter_var($disponibilite,FILTER_SANITIZE_STRING);
 
-
-function update ($id,$nom,$difficulte,$distance,$duree,$denivele) {
+function update ($id,$nom,$difficulte,$distance,$duree,$denivele,$disponibilite) {
 
     GLOBAL $conn;
 
-    $sql = "UPDATE `hiking` set `name`= '$nom', `difficulty`= '$difficulte', `distance`= '$distance', `duration` = '$duree', `height_difference` ='$denivele' where `id`= $id";
+    $sql = "UPDATE `hiking` set `name`= '$nom', `difficulty`= '$difficulte', `distance`= '$distance', `duration` = '$duree', `height_difference` ='$denivele', `available`='$disponibilite'  where `id`= $id";
 
     $conn->query($sql);
 
 }
-if(isset($_POST['name']) && isset($_POST['id']) && isset($_POST['difficulty']) && isset($_POST['distance']) && isset($_POST['duration']) && isset($_POST['height_difference'])) {
+if(isset($_POST['name']) && isset($_POST['id']) && isset($_POST['difficulty']) && isset($_POST['distance']) && isset($_POST['duration']) && isset($_POST['height_difference']) && isset($_POST['available'])) {
 
-    update($id, $nom, $difficulte, $distance, $duree, $denivele);
+    update($id, $nom, $difficulte, $distance, $duree, $denivele,$disponibilite);
 
 }
 

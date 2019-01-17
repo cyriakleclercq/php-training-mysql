@@ -1,5 +1,6 @@
 <?php
 include 'log.php';
+session_start();
 ?>
 
 
@@ -72,6 +73,7 @@ include 'log.php';
             <th> Distance</th>
             <th> Durée</th>
             <th> Dénivelé</th>
+            <th> Available</th>
 
             <?php
             while ($row = $result->fetch_assoc()) {
@@ -81,14 +83,17 @@ include 'log.php';
                 $val3 = $row['distance'];
                 $val4 = $row['duration'];
                 $val5 = $row['height_difference'];
+                $val6 = $row['available']
                 ?>
                 <tr>
                     <td> <a href="delete.php?id=<?=$val0 ?>">supprimer </a> </td>
-                    <td> <a href="update.php?id=<?= $val0 ?>&amp;nom=<?= $val1 ?>&amp;difficulte=<?= $val2 ?>&amp;distance=<?= $val3 ?>&amp;duree=<?= $val4 ?>&amp;denivele=<?= $val5?> "> <?= $row['name'] ?> </a> </td>
+                    <td> <a href="update.php?id=<?= $val0 ?>&amp;nom=<?= $val1 ?>&amp;difficulte=<?= $val2 ?>&amp;distance=<?= $val3 ?>&amp;duree=<?= $val4 ?>&amp;denivele=<?= $val5?>&amp;disponibilite=<?= $val6?> "> <?= $row['name'] ?> </a> </td>
                     <td> <?= $row['difficulty'] ?></td>
                     <td> <?= $row['distance'] ?></td>
                     <td> <?= $row['duration'] ?></td>
                     <td> <?= $row['height_difference'] ?> </td>
+                    <td> <?= $row['available'] ?> </td>
+
                 </tr>
 
                 <?php
@@ -103,5 +108,14 @@ include 'log.php';
 
     affichage(); ?>
 
-  </body>
+    <div class="dsc">
+        <div class="deco">
+            <a href="create.php"> Ajouter </a>
+        </div>
+        <div class="deco">
+            <a href="logout.php"> Deconnexion </a>
+        </div>
+    </div>
+
+</body>
 </html>
